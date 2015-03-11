@@ -1,0 +1,91 @@
+#Search Using a boolean variable
+http://www.codeskulptor.org/#user39_RkAbWAhHsw_2.py
+
+found = False
+print 'Before', found
+for value in [9, 41, 12, 3, 74, 15]:
+    if value == 3:
+        found = True
+    print found, value
+    
+print 'After', found
+
+
+http://www.codeskulptor.org/#user39_9zO3yMo5ii_0.py
+
+print 'Before'
+for value in [9, 41, 12, 3, 74, 15]:
+    if value > 20:
+        print 'Large number', value
+    
+print 'After'
+
+
+#Finding the Average in a Loop
+
+http://www.codeskulptor.org/#user39_1lIgH09HEJ_0.py
+
+count = 0
+sum = 0
+print 'Before', count, sum
+for value in [9, 41, 12, 3, 74, 15]:
+    count = count + 1
+    sum = sum + value
+    print count, sum, value
+
+print 'After', count, sum, sum / count
+
+
+# Finding the largest number ?
+http://www.codeskulptor.org/#user39_wB9DNrRVlK_0.py
+
+largest_so_far = -1
+print 'Before', largest_so_far
+for the_num in [9, 41, 12, 3, 74, 15]:
+    if the_num > largest_so_far:
+        largest_so_far = the_num
+    print largest_so_far, the_num
+
+print 'After', largest_so_far
+
+
+#Finding the smallest value
+http://www.codeskulptor.org/#user39_jzTiQCIUVC_8.py
+
+smallest = None
+print 'Before', smallest
+for value in [9, 41, 12, 3, 74, 15]:
+    if smallest is None:
+        sallest = value
+    elif value < smallest:
+        smallest = value
+    print smallest, value
+    
+print 'After', smallest
+
+
+Assignment 5.2
+
+largest = None
+smallest = None
+while True:
+    num = raw_input("Enter a number: ")
+    
+    if num == "done" :
+        print 'Maximum is %s' % largest 
+        print 'Minimum is %s' % smallest
+        break
+    
+    try:
+        num = int(num)
+        
+        if smallest is None or num <= smallest:
+            smallest = num
+            
+        if largest is None or num >= largest:
+            largest = num
+            
+    except:
+        print 'Invalid input'
+
+
