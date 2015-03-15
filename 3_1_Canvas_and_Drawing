@@ -1,0 +1,73 @@
+http://www.codeskulptor.org/#user39_l9OtSlMUmG_2.py
+
+# Canvas and drawing 
+
+# Event-driven drawing:
+#Computer monitor - 2D grid of pixels stored in frame buffer
+#Computers update the monitor based on the frame buffer at
+#rate of around 60-72 times a second - refresh rate
+#Many applications will register a special function called
+#a "draw handler".
+#In CodeSkulptor, register the draw handler using a simpleGUI
+#command. CodeSkulptor calls the draw handler around 60 times
+#per seconds.
+#Draw handler updates the canvas using a collection of draw
+#commands that include draw_text, draw_line, draw_circle
+
+#Canvas coordinates
+
+#simplegui.create_frame("Title", width, height)
+
+# first example of drawing on the canvas
+
+import simplegui
+
+# define draw handler
+def draw(canvas):
+    canvas.draw_text("Hello!",[100, 100], 24, "White")
+    canvas.draw_circle([100, 100], 2, 2, "Red")
+
+# create frame
+frame = simplegui.create_frame("Text drawing", 300, 200)
+
+# register draw handler    
+frame.set_draw_handler(draw)
+
+# start frame
+frame.start()
+
+#Q = On a SimpleGUI canvas of size 300 by 200 pixels, what
+#is the pixel coordinate of the bottom right pixel? 
+#A = On a 300 by 200 pixel canvas, the pixel coordinates range
+#from 0, 0 in the top left to 299, 199 in the bottom right.
+
+#---------------------------------------------------------------
+
+# example of drawing operations in simplegui
+# standard HMTL color such as "Red" and "Green"
+# note later drawing operations overwrite earlier drawing operations
+
+import simplegui
+# Handler to draw on canvas
+def draw(canvas):
+    canvas.draw_circle([100, 100], 50, 2, "Red", "Pink")
+    canvas.draw_circle([300, 300], 50, 2, "Red", "Pink")
+    canvas.draw_line([100, 100],[300, 300], 2, "Black")
+    canvas.draw_circle([100, 300], 50, 2, "Green", "Lime")
+    canvas.draw_circle([300, 100], 50, 2, "Green", "Lime")
+    canvas.draw_line([100, 300],[300, 100], 2, "Black")
+    canvas.draw_polygon([[150, 150], [250, 150], [250, 250], [150, 250]], 2, 
+          "Blue", "Aqua")
+    canvas.draw_text("An example of drawing", [60, 385], 24, "Black")
+
+    
+# Create a frame and assign callbacks to event handlers
+frame = simplegui.create_frame("Home", 400, 400)
+frame.set_draw_handler(draw)
+frame.set_canvas_background("Yellow")
+
+
+# Start the frame animation
+frame.start()
+
+
