@@ -1,0 +1,181 @@
+# control the position of a ball using the arrow keys
+http://www.codeskulptor.org/#user39_jANyTc2vyi_0.py
+
+import simplegui
+
+# Initialize globals
+WIDTH = 600
+HEIGHT = 400
+BALL_RADIUS = 20
+
+ball_pos = [WIDTH / 2, HEIGHT / 2]
+
+# define event handlers
+def draw(canvas):
+    canvas.draw_circle(ball_pos, BALL_RADIUS, 2, "Red", "White")
+
+def keydown(key):
+    vel = 4
+    if key == simplegui.KEY_MAP["left"]:
+        ball_pos[0] -= vel
+    elif key == simplegui.KEY_MAP["right"]:
+        ball_pos[0] += vel
+    elif key == simplegui.KEY_MAP["down"]:
+        ball_pos[1] += vel
+    elif key == simplegui.KEY_MAP["up"]:
+        ball_pos[1] -= vel        
+    
+# create frame 
+frame = simplegui.create_frame("Positional ball control", WIDTH, HEIGHT)
+
+# register event handlers
+frame.set_draw_handler(draw)
+frame.set_keydown_handler(keydown)
+
+# start frame
+frame.start()
+
+
+Controlling position vs. velocity
+Position control of point p
+No update in draw handler
+
+Position update in key handler
+Left arrow -> p[0] -= c
+Right arrow -> p[0] += c
+Up arrow -> p[1] -= c
+Down arrow -> p[1] += c
+
+Velocity control of point p
+
+Position update in draw handler
+p[0] += v[0]
+p[1] += v[1]
+
+Velocity update in key handler
+Left arrow -> v[0] -= c
+Right arrow -> v[0] += c
+Up arrow -> v[1] -= c
+Down arrow -> v[1] += c
+
+
+# control the velocity of a ball using the arrow keys
+http://www.codeskulptor.org/#user39_m6Vrl2GbQc_0.py
+
+import simplegui
+
+# Initialize globals
+WIDTH = 600
+HEIGHT = 400
+BALL_RADIUS = 20
+
+ball_pos = [WIDTH / 2, HEIGHT / 2]
+vel = [0, 0]
+
+# define event handlers
+def draw(canvas):
+    # Update ball position
+    ball_pos[0] += vel[0]
+    ball_pos[1] += vel[1]
+
+    # Draw ball
+    canvas.draw_circle(ball_pos, BALL_RADIUS, 2, "Red", "White")
+
+def keydown(key):
+    acc = 1
+    if key==simplegui.KEY_MAP["left"]:
+        vel[0] -= acc
+    elif key==simplegui.KEY_MAP["right"]:
+        vel[0] += acc
+    elif key==simplegui.KEY_MAP["down"]:
+        vel[1] += acc
+    elif key==simplegui.KEY_MAP["up"]:
+        vel[1] -= acc
+        
+    print ball_pos
+    
+# create frame 
+frame = simplegui.create_frame("Velocity ball control", WIDTH, HEIGHT)
+
+# register event handlers
+frame.set_draw_handler(draw)
+frame.set_keydown_handler(keydown)
+
+# start frame
+frame.start()
+
+In this last example, where is the position of the ball updated?
+In the draw handler
+
+#Visualizing list and mutation
+###################################
+# Mutation vs. assignment
+http://www.codeskulptor.org/viz/#examples_lists_mutation.py
+
+################
+# Look alike, but different
+
+a = [4, 5, 6]
+b = [4, 5, 6]
+print "Original a and b:", a, b
+print "Are they same thing?", a is b
+
+a[1] = 20
+print "New a and b:", a, b
+print
+
+################
+# Aliased
+
+c = [4, 5, 6]
+d = c
+print "Original c and d:", c, d
+print "Are they same thing?", c is d
+
+c[1] = 20
+print "New c and d:", c, d
+print
+
+################
+# Copied
+
+e = [4, 5, 6]
+f = list(e)
+print "Original e and f:", e, f
+print "Are they same thing?", e is f
+
+e[1] = 20
+print "New e and f:", e, f
+print
+
+
+###################################
+# Interaction with globals
+
+
+a = [4, 5, 6]
+
+def mutate_part(x):
+    a[1] = x
+
+def assign_whole(x):
+    a = x
+
+def assign_whole_global(x):
+    global a
+    a = x
+
+mutate_part(100)
+print a
+
+assign_whole(200)
+print a
+
+assign_whole_global(300)
+print a
+
+#Consider the following Python code:
+#a = b = [1, 2, 3]
+#b[2] = 4
+#What is the value of a[2] after running this code?
+#4
